@@ -1,15 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Stack;
-import java.util.Vector;
-import java.util.Map.Entry;
+
 
 public abstract class Automaton {
 	
 	private HashMap<String, HashMap<String,String[]>> conections;
-	private Vector<HashSet<String>> partition;
+	
 
 	
 	protected int numStates; //num ststes the machine
@@ -17,6 +15,8 @@ public abstract class Automaton {
 	protected String S[];
 	protected String R[];
 	protected String states[];
+	private ArrayList<String> partition;
+
 	
 	public Automaton(int numStates, String start, String[] s, String[] r, String[] states) {
 		super();
@@ -26,7 +26,7 @@ public abstract class Automaton {
 		R = r;
 		this.states = states;
 		conections = new HashMap<>();
-		partition = new Vector<>();
+		partition = new ArrayList<>();
 	}
 
 	public int getNumStates() {
@@ -69,43 +69,28 @@ public abstract class Automaton {
 		this.states = states;
 	}
 	
-	public void stateVisited() {
-		HashMap<String, Boolean> visit = new HashMap<>();
-		for(int i=0; i <numStates; i++) {
-			visit.put(states[i], false);
-		}
-		
-		Stack<String> stack = new Stack<>();
-		String stk;
-		stack.add(start);
-		
-		while (!stack.isEmpty()) {
-			stk=stack.pop();
-			
-			if(!visit.get(stk)) {
-				visit.put(stk, true);				
-				
-			}
-			
-			String s;
-			for(Entry<String, String[]> e: conections.get(stk).entrySet()) {
-				s= e.getValue()[0];
-				if(!visit.get(s)) {
-					stack.push(s);	
-				}
-			}
-			
-		}
-		for(int i = 0; i<numStates; i++) {
-			if(!visit.get(states[i])) {
-				conections.remove(states[i]);
-			}
-		}
-
-	}
+	public abstract void stateVisited();
 	
-	public void confirm(int confirm) {
-		
+	public abstract void secondParticion();
+	
+	public abstract void isVisited(int visit);
+	
+	public abstract String [][] matrixInformatión();
+
+	public HashMap<String, HashMap<String, String[]>> getConections() {
+		return conections;
+	}
+
+	public void setConections(HashMap<String, HashMap<String, String[]>> conections) {
+		this.conections = conections;
+	}
+
+	public ArrayList<String> getPartition() {
+		return partition;
+	}
+
+	public void setPartition(ArrayList<String> partition) {
+		this.partition = partition;
 	}
 
 }

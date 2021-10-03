@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AutomatonFiniteController">
@@ -32,29 +33,22 @@
             <TextField fx:id="inputAlphabetS" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="194.0" text="Number of finite states" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Enter of inputs " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generate" text="Generate" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <MenuBar GridPane.columnIndex="4" GridPane.rowIndex="1">
-              <menus>
-                <Menu mnemonicParsing="false" text="Type of machine">
-                  <items>
-                    <MenuItem fx:id="mealy" mnemonicParsing="false" onAction="#initMealyMachine" text="Mealy Machine" />
-                        <MenuItem fx:id="mooreMachine" mnemonicParsing="false" onAction="#initMooreMachine" text="Moore Machine" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
+            <Button fx:id="generate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#generate" text="Generate" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ComboBox fx:id="typeMachine" prefWidth="150.0" promptText="Type of Machine" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </top>
    <center>
-      <GridPane fx:id="matrix" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane fx:id="pane1" prefHeight="310.0" prefWidth="305.0" />
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+            <ScrollPane fx:id="pane2" prefHeight="310.0" prefWidth="308.0" />
+         </children>
+      </HBox>
    </center>
 </BorderPane>
