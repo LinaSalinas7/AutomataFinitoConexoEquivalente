@@ -61,6 +61,12 @@ public class MooreMachine extends Automaton {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String[][] matrixInformatión() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

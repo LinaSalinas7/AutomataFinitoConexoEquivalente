@@ -21,7 +21,7 @@ public class MealyMachine extends Automaton {
 		
 	}
 
-	//add
+	
 	public void addGraph(String q, String s, String eDestine, String cExit) {
 		String a[] = {eDestine, cExit};
 		HashMap<String, String[]> t = conections.getOrDefault(q, new HashMap<>());
@@ -29,9 +29,10 @@ public class MealyMachine extends Automaton {
 		conections.put(q, t);
 	}
 	
-	//generateequivalentminnimun
+	
 	public void equivalentMinimun() {
 		stateVisited();
+		secondParticion();
 		
 		boolean m = true;
 		while (m) {
@@ -47,7 +48,7 @@ public class MealyMachine extends Automaton {
 		}
 	}
 	
-	//dfs
+	
 	public void stateVisited() {
 		HashMap<String, Boolean> visit = new HashMap<>();
 		for(int i=0; i <numStates; i++) {
@@ -99,7 +100,7 @@ public class MealyMachine extends Automaton {
 	}
 
 	@Override
-	//check
+
 	public void isVisited(int visit) {
 		int l = partition.size();
 		boolean isCreate = false;
@@ -170,8 +171,5 @@ public class MealyMachine extends Automaton {
 		}
 		return matrix;
 	}
-	
-	
-	
 
 }
