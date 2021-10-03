@@ -17,11 +17,9 @@ public class MealyMachine extends Automaton {
 		super(numStates, start, s, r, states);
 		// TODO Auto-generated constructor stub
 		conections=new HashMap<>();
-		//partition=new Vector<>();
-		
+		partition=new Vector<>();	
 	}
 
-	
 	public void addGraph(String q, String s, String eDestine, String cExit) {
 		String a[] = {eDestine, cExit};
 		HashMap<String, String[]> t = conections.getOrDefault(q, new HashMap<>());
@@ -29,11 +27,8 @@ public class MealyMachine extends Automaton {
 		conections.put(q, t);
 	}
 	
-	
 	public void equivalentMinimun() {
-		stateVisited();
-		secondParticion();
-		
+		stateVisited();		
 		boolean m = true;
 		while (m) {
 			int sizeA = partition.size();
@@ -48,33 +43,26 @@ public class MealyMachine extends Automaton {
 		}
 	}
 	
-	
 	public void stateVisited() {
 		HashMap<String, Boolean> visit = new HashMap<>();
 		for(int i=0; i <numStates; i++) {
 			visit.put(states[i], false);
-		}
-		
+		}		
 		Stack<String> stack = new Stack<>();
 		String stk;
-		stack.add(start);
-		
+		stack.add(start);		
 		while (!stack.isEmpty()) {
-			stk=stack.pop();
-			
+			stk=stack.pop();			
 			if(!visit.get(stk)) {
 				visit.put(stk, true);				
-				
-			}
-			
+			}			
 			String s;
 			for(Map.Entry<String, String[]> e: conections.get(stk).entrySet()) {
 				s= e.getValue()[0];
 				if(!visit.get(s)) {
 					stack.push(s);	
 				}
-			}
-			
+			}			
 		}
 		for(int i = 0; i<numStates; i++) {
 			if(!visit.get(states[i])) {
@@ -100,13 +88,11 @@ public class MealyMachine extends Automaton {
 	}
 
 	@Override
-
 	public void isVisited(int visit) {
 		int l = partition.size();
 		boolean isCreate = false;
 		String last = "";
-		LinkedList<String> queue = new LinkedList<>();
-		
+		LinkedList<String> queue = new LinkedList<>();		
 		for (String strings : partition.get(visit)) {
 			if(!last.isEmpty()) {
 				boolean exist = true;
@@ -114,8 +100,7 @@ public class MealyMachine extends Automaton {
 					for(int i=0; i< S.length && exist; i++) {
 						if(!m.contains(conections.get(last).get(S[i])[0]) 
 								&& m.contains(conections.get(strings).get(S[i])[0])){
-							exist=false;
-							
+							exist=false;							
 						}
 						if (m.contains(conections.get(last).get(S[i])[0]) 
 								&& !m.contains(conections.get(strings).get(S[i])[0])) {
@@ -130,8 +115,7 @@ public class MealyMachine extends Automaton {
 				if(!exist && isCreate) {
 					partition.get(l).add(strings);
 					queue.offer(strings);
-				}
-				
+				}	
 			}
 			if(isCreate) {
 				while (!queue.isEmpty()) {
@@ -140,18 +124,15 @@ public class MealyMachine extends Automaton {
 				isVisited(l);
 			}
 		}
-		
 	}
 
 	@Override
 	public String[][] matrixInformatión() {
 		String matrix[][] = new String[partition.size()][S.length + 1];
 		HashMap<String, String> r = new HashMap<>();
-
 		for (int i = 0; i < matrix.length; i++) {
 			Arrays.fill(matrix[i], "");
 		}
-
 		int conta = 0;
 		for (HashSet<String> s : partition) {
 			for (String st : s) {
@@ -159,7 +140,6 @@ public class MealyMachine extends Automaton {
 			}
 			conta++;
 		}
-
 		for (int i = 0; i < matrix.length; i++) {
 			matrix[i][0] = "P" + (i);
 			for (int j = 1; j < matrix[0].length; j++) {
@@ -171,5 +151,8 @@ public class MealyMachine extends Automaton {
 		}
 		return matrix;
 	}
+	
+	
+	
 
 }

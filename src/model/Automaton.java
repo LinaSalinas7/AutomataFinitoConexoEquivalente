@@ -71,6 +71,8 @@ public abstract class Automaton {
 	
 	public abstract void stateVisited();
 	
+	public abstract void addGraph(String q, String s, String eDestine, String cExit);
+	
 	public abstract void secondParticion();
 	
 	public abstract void isVisited(int visit);
