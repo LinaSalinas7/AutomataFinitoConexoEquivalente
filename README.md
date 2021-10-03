@@ -1,1 +1,1 @@
-# AutomataFinitoConexoEquivalente
+# Automata finito conexo equivalente
