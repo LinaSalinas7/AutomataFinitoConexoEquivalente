@@ -168,4 +168,16 @@ public class MooreMachine extends Automaton {
 		}
 		return matrix;
 	}
+	
+	public String[] arrSalida() {
+		String rst[] = new String[S.length + 1];
+
+		Arrays.fill(rst, "");
+
+		for (int i = 1; i < S.length + 1; i++) {
+			rst[i] = S[i - 1];
+		}
+
+		return rst;
+	}
 }
