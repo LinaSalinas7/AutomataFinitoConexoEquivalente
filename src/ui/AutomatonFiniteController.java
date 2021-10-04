@@ -22,42 +22,81 @@ public class AutomatonFiniteController {
 
     @FXML
     private GridPane gridPane;
+    
+    /*
+     * Número de estados
+     * */
 
     @FXML
     private TextField stateQ;
+    
+    /*
+     * Alfabeto de entrada
+     * */
 
     @FXML
     private TextField inputAlphabetS;
+    
+    /*
+     * Boton que genera el automata minimo equivalente
+     * */
 
     @FXML
     private Button generate;
+    
+    /*
+     * Ayuda a seleccionar la maquina
+     * */
 
     @FXML
     private ComboBox<String> typeMachine;
+    
+    /*
+     * Contenedor
+     * */
 
     @FXML
     private ScrollPane pane1;
+    
+    /*
+     * Contenedor
+     * */
 
     @FXML
     private ScrollPane pane2;
-
+    
+    /*
+     * Conexión con el modelo
+     * */
     
     private Automaton automaton;
+    
     private int rows;
+    
     private int columns;
+    
     private String[] arr;
     
-    private GridPane gridP2;
+    
+    private GridPane gridP2; 
     
     private TextField[][] tf;
     
     private String[] arrStimulus;
+    
+    /*
+     * Metodo que inicializa la aplicación
+     **/
     
     @FXML
     private void initialize() {
     	typeMachine.getItems().addAll("MOORE", "MEALY");
     	
     }
+    
+    /*
+     * Metodo que genera la matriz donde se ingresan los datos
+     * */
 
     @FXML
     void generate(ActionEvent event) {
@@ -112,6 +151,10 @@ public class AutomatonFiniteController {
     		
     	}
     
+    /*
+     * Metodo que muestra el automata minimo
+     * */
+    
     public void miniMachine() {
     	
     	gridP2 = new GridPane();
@@ -128,11 +171,15 @@ public class AutomatonFiniteController {
     	
     }
     
+    /*
+     * Genera la maquina de estado Moore
+     * */
+    
     public void readMoore() {
     	
     	String[][] matrix = readTextFields("MOORE");
 
-        MooreMachine<Character, Character, Character> mooreMachine = new MooreMachine<>('A', matrix[matrix.length - 1][0].charAt(0));
+        MooreMachine(int numStates, String start, String[] s, String[] r, String[] states) mooreMachine = new MooreMachine<>('A', matrix[matrix.length - 1][0].charAt(0));
 
         for (int j = 0; j < matrix[0].length; j++) {
             char temp = (char) (j + 65);
@@ -170,10 +217,14 @@ public class AutomatonFiniteController {
     	
     }
     
+    /*
+     * Genera la maquina de estado Mealy
+     * */
+    
     public void readMealy() {
     	
     	String[][] matrix = readTextFields("MEALY");
-        MealyMachine<Character, Character, Character> mealyMachine = new MealyMachine<>('A');
+        MealyMachine(Integer.parseInt(stateQ.getText()), start, s[], r, states) mealyMachine = new MealyMachine<>('A');
 
         for (int j = 1; j < matrix[0].length; j++) {
             char temp = (char) (j + 65);
@@ -210,6 +261,11 @@ public class AutomatonFiniteController {
     	
     }
     
+    /*
+     * este metodo coloca el encabezado de los estímulos tecleados por el usuario 
+     * para brindar una mejor vista al usuario
+     * */
+    
     private void fillHeaders(GridPane grid) {
         for (int i = 1; i < columns + 1; i++) {
             TextField ta = new TextField(arrStimulus[i - 1]);
@@ -229,6 +285,11 @@ public class AutomatonFiniteController {
         gridP2.add(ta, 0, i);
         return current;
     }
+    
+    /*
+     * Lee la entrada que el usuario puso en la matriz teniendo en 
+     * cuenta si era una máquina Moore o Mealy
+     * */
     
     private String[][] readTextFields(String type) {
         String[][] matrix = new String[type.equals("MOORE") ? columns + 1 : columns][rows];

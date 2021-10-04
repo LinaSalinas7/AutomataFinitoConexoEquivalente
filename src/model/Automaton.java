@@ -10,13 +10,16 @@ public abstract class Automaton {
 	
 
 	
-	protected int numStates; //num ststes the machine
-	protected String start; 
-	protected String S[];
-	protected String R[];
+	protected int numStates; //numero estado de la maquina
+	protected String start; //estado inicial
+	protected String S[]; //Alfabeto
+	protected String R[]; //Alfabeto de salida
 	protected String states[];
 	private ArrayList<String> partition;
 
+	/*
+	 *Metodo constructor 
+	 */
 	
 	public Automaton(int numStates, String start, String[] s, String[] r, String[] states) {
 		super();
@@ -28,6 +31,10 @@ public abstract class Automaton {
 		conections = new HashMap<>();
 		partition = new ArrayList<>();
 	}
+	
+	/*
+	 * Metodos get y set
+	 * */
 
 	public int getNumStates() {
 		return numStates;
@@ -69,20 +76,6 @@ public abstract class Automaton {
 		this.states = states;
 	}
 	
-	public abstract void stateVisited();
-	
-	public abstract void addGraph(String q, String s, String eDestine, String cExit);
-	
-	public abstract void secondParticion();
-	
-	public abstract void isVisited(int visit);
-	
-	public abstract String [][] matrixInformatión();
-
-	public HashMap<String, HashMap<String, String[]>> getConections() {
-		return conections;
-	}
-
 	public void setConections(HashMap<String, HashMap<String, String[]>> conections) {
 		this.conections = conections;
 	}
@@ -94,5 +87,41 @@ public abstract class Automaton {
 	public void setPartition(ArrayList<String> partition) {
 		this.partition = partition;
 	}
+	
+	public HashMap<String, HashMap<String, String[]>> getConections() {
+		return conections;
+	}
+	
+	/*
+	 * Metodo que se encarga de recorrer el grafo y eliminar estados no son accesibles
+	 * */
+	
+	public abstract void stateVisited();
+	
+	/*
+	 * Metodo encargado de agregar al grafo las conexiones entre estados
+	 * @param i String que representa el nombre de cada estado
+	 * @param src String que representa algun caracter del alfabeto
+	 * @param dst String que representa el estado De destino
+	 * @param sali String que representa algunc caracter del alfabeto de salida
+	 */
+	
+	public abstract void addGraph(String q, String s, String eDestine, String cExit);
+	
+	/*
+	 * Metodo que realiza la segunda partición de la maquina
+	 * */
+	
+	public abstract void secondParticion();
+	
+	
+	public abstract void isVisited(int visit);
+	
+	/*
+	 * metodo que retorna una matriz con la información
+	 */
+	
+	public abstract String [][] matrixInformatión();
 
+	
 }
